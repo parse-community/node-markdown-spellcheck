@@ -79,8 +79,19 @@ function checkWord(word, options) {
     return true;
   }
 
+  word = word.split('_').join('-');
   if (word.indexOf('-')) {
     var subWords = word.split('-');
+
+    if (subWords.every(function (subWord) {
+      return spellchecker.check(subWord);
+    })) {
+      return true;
+    }
+  }
+  var sentanceCase = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+  if (sentanceCase != word) {
+    var subWords = sentanceCase.split(' ');
 
     if (subWords.every(function (subWord) {
       return spellchecker.check(subWord);

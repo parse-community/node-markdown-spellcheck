@@ -64,10 +64,18 @@ function checkWord(word, options) {
   if (spellchecker.check(wordWithDot)) {
     return true;
   }
-
+  word = word.split('_').join('-');
   if (word.indexOf('-')) {
     const subWords = word.split('-');
 
+    if (subWords.every((subWord) => spellchecker.check(subWord))) {
+      return true;
+    }
+  }
+
+  const sentanceCase = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+  if (sentanceCase != word) {
+    const subWords = sentanceCase.split(' ');
     if (subWords.every((subWord) => spellchecker.check(subWord))) {
       return true;
     }
