@@ -100,6 +100,11 @@ function checkWord(word, options) {
     }
   }
 
+  if(word.endsWith("s")) {
+    word = word.slice(0,-1)
+    return spellchecker.check(word);
+  }
+  
   return false;
 }
 

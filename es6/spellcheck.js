@@ -80,6 +80,11 @@ function checkWord(word, options) {
       return true;
     }
   }
+  
+  if(word.endsWith("s")) {
+    word = word.slice(0,-1)
+    return spellchecker.check(word);
+  }
 
   return false;
 }
