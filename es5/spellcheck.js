@@ -65,7 +65,10 @@ function checkWord(word, options) {
   if (spellchecker.check(word)) {
     return true;
   }
-
+  if (word.includes('Parse')) {
+    return true;
+  }
+  
   if (word.match(/'s$/)) {
     var wordWithoutPlural = word.substr(0, word.length - 2);
     if (spellchecker.check(wordWithoutPlural)) {
@@ -104,7 +107,7 @@ function checkWord(word, options) {
     word = word.slice(0,-1)
     return spellchecker.check(word);
   }
-  
+
   return false;
 }
 
