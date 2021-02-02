@@ -19,6 +19,7 @@ exports.default = function (src) {
   }
 
   tracker.removeAll(/```[\w\W]*?```/);
+  tracker.removeAll(/~~~[\w\W]*?~~~/);
   tracker.replaceAll(/<code[\w\W]*?<\/code>/, " ");
   tracker.removeAll(/``[\w\W]*?``/);
   tracker.removeAll(/`[^`]*`/);
