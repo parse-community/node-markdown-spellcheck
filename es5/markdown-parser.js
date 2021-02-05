@@ -25,7 +25,9 @@ exports.default = function (src) {
   tracker.replaceAll(/&[#a-z0-9]{1,5};/, " ");
   src = tracker.replaceAll(/<\/?[a-z0-9]+ ?([a-z]+="[^"]*" ?)*\/?>/i, " ");
   src = src.split('`').join(' ');
-  
+  src = src.split('-').join(' ');
+  src = src.split('#').join(' ');
+
   var options = {
     gfm: true,
     renderer: {
