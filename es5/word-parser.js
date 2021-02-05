@@ -27,7 +27,13 @@ exports.default = function (tokens) {
       if (badEndings) {
         word = word.substr(0, word.length - badEndings[0].length);
       }
-      wordList.push({ word: word, index: thisWordIndex });
+
+      var wordTwo = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+      var wordSplit = wordTwo.split(' ')
+      for (var i=0;i<wordSplit.length;i++) {      
+        var split = wordSplit[i];
+        wordList.push({ word: split, index: thisWordIndex + word.indexOf(split) });
+      }
 
       index += nextWord.index + nextWord[0].length;
       text = text.slice(nextWord.index + nextWord[0].length);

@@ -16,12 +16,8 @@ export default function(src) {
     tracker.replaceAll(jekyllFrontMatter, " ");
   }
 
-  tracker.removeAll(/```[\w\W]*?```/);
-  tracker.removeAll(/~~~[\w\W]*?~~~/);
-  tracker.removeAll(/``[\w\W]*?``/);
   tracker.removeAll(/`[^`]*`/);
   tracker.replaceAll(/<style[\w\W]*?<\/style>/, " "); // remove contents of style
-  tracker.replaceAll(/<script[\w\W]*?<\/script>/, " "); // remove contents of scripts
   tracker.replaceAll(/\{%\s*highlight[\w\W]*?\{%\s*endhighlight\s*%\}/, " "); // remove contents code blocks
   tracker.replaceAll(/\{%.*%\}/, " ");
   tracker.replaceAll(/\{\{.*\}\}/, " ");
