@@ -27,6 +27,7 @@ exports.default = function (src) {
   src = src.split('`').join(' ');
   src = src.split('-').join(' ');
   src = src.split('#').join(' ');
+  src = src.split('_').join(' ');
 
   var options = {
     gfm: true,
