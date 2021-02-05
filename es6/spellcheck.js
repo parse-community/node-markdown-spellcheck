@@ -59,6 +59,10 @@ function checkWord(word, options) {
     }
   }
 
+  if (word.includes('Parse')) {
+    return true;
+  }
+
   // for etc. as we cannot tell if it ends in "." as that is stripped
   const wordWithDot = word + ".";
   if (spellchecker.check(wordWithDot)) {
