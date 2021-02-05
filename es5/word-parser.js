@@ -30,8 +30,8 @@ exports.default = function (tokens) {
 
       var wordTwo = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
       var wordSplit = wordTwo.split(' ')
-      for (var i=0;i<wordSplit.length;i++) {      
-        var split = wordSplit[i];
+      for (var x=0;x<wordSplit.length;x++) {      
+        var split = wordSplit[x];
         wordList.push({ word: split, index: thisWordIndex + word.indexOf(split) });
       }
 
