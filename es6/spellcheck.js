@@ -59,18 +59,35 @@ function checkWord(word, options) {
     }
   }
 
+  if (word.includes('Parse')) {
+    return true;
+  }
+
   // for etc. as we cannot tell if it ends in "." as that is stripped
   const wordWithDot = word + ".";
   if (spellchecker.check(wordWithDot)) {
     return true;
   }
-
+  word = word.split('_').join('-');
   if (word.indexOf('-')) {
     const subWords = word.split('-');
 
     if (subWords.every((subWord) => spellchecker.check(subWord))) {
       return true;
     }
+  }
+
+  const sentanceCase = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+  if (sentanceCase != word) {
+    const subWords = sentanceCase.split(' ');
+    if (subWords.every((subWord) => spellchecker.check(subWord))) {
+      return true;
+    }
+  }
+
+  if(word.endsWith("s")) {
+    word = word.slice(0,-1)
+    return spellchecker.check(word);
   }
 
   return false;

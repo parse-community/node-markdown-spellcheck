@@ -65,7 +65,10 @@ function checkWord(word, options) {
   if (spellchecker.check(word)) {
     return true;
   }
-
+  if (word.includes('Parse')) {
+    return true;
+  }
+  
   if (word.match(/'s$/)) {
     var wordWithoutPlural = word.substr(0, word.length - 2);
     if (spellchecker.check(wordWithoutPlural)) {
@@ -79,6 +82,7 @@ function checkWord(word, options) {
     return true;
   }
 
+  word = word.split('_').join('-');
   if (word.indexOf('-')) {
     var subWords = word.split('-');
 
@@ -87,6 +91,21 @@ function checkWord(word, options) {
     })) {
       return true;
     }
+  }
+  var sentanceCase = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+  if (sentanceCase != word) {
+    var subWords = sentanceCase.split(' ');
+
+    if (subWords.every(function (subWord) {
+      return spellchecker.check(subWord);
+    })) {
+      return true;
+    }
+  }
+
+  if(word.endsWith("s")) {
+    word = word.slice(0,-1)
+    return spellchecker.check(word);
   }
 
   return false;
