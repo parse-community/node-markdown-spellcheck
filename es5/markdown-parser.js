@@ -17,12 +17,6 @@ exports.default = function (src) {
   if (jekyllFrontMatter) {
     tracker.replaceAll(jekyllFrontMatter, " ");
   }
-
-  tracker.removeAll(/```[\w\W]*?```/);
-  tracker.removeAll(/~~~[\w\W]*?~~~/);
-  tracker.replaceAll(/<code[\w\W]*?<\/code>/, " ");
-  tracker.removeAll(/``[\w\W]*?``/);
-  tracker.removeAll(/`[^`]*`/);
   tracker.replaceAll(/<style[\w\W]*?<\/style>/, " "); // remove contents of style
   tracker.replaceAll(/<script[\w\W]*?<\/script>/, " "); // remove contents of scripts
   tracker.replaceAll(/\{%\s*highlight[\w\W]*?\{%\s*endhighlight\s*%\}/, " "); // remove contents code blocks
@@ -30,6 +24,10 @@ exports.default = function (src) {
   tracker.replaceAll(/\{\{.*\}\}/, " ");
   tracker.replaceAll(/&[#a-z0-9]{1,5};/, " ");
   src = tracker.replaceAll(/<\/?[a-z0-9]+ ?([a-z]+="[^"]*" ?)*\/?>/i, " ");
+  src = src.split('`').join(' ');
+  src = src.split('-').join(' ');
+  src = src.split('#').join(' ');
+  src = src.split('_').join(' ');
 
   var options = {
     gfm: true,

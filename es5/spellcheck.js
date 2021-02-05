@@ -65,9 +65,6 @@ function checkWord(word, options) {
   if (spellchecker.check(word)) {
     return true;
   }
-  if (word.includes('Parse')) {
-    return true;
-  }
   
   if (word.match(/'s$/)) {
     var wordWithoutPlural = word.substr(0, word.length - 2);

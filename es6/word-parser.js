@@ -22,7 +22,14 @@ export default function(tokens) {
       if (badEndings) {
         word = word.substr(0, word.length - badEndings[0].length);
       }
-      wordList.push({ word: word, index: thisWordIndex });
+      word = word.split('.').join(' ')
+      const wordTwo = word.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+      for (const split of wordTwo.split(' ')) {      
+        if (split === '') {
+          continue;
+        }
+        wordList.push({ word: split, index: thisWordIndex + word.indexOf(split) });
+      }
 
       index += nextWord.index + nextWord[0].length;
       text = text.slice(nextWord.index + nextWord[0].length);
