@@ -16,13 +16,13 @@ export default function(src) {
     tracker.replaceAll(jekyllFrontMatter, " ");
   }
 
-  tracker.removeAll(/`[^`]*`/);
   tracker.replaceAll(/<style[\w\W]*?<\/style>/, " "); // remove contents of style
   tracker.replaceAll(/\{%\s*highlight[\w\W]*?\{%\s*endhighlight\s*%\}/, " "); // remove contents code blocks
   tracker.replaceAll(/\{%.*%\}/, " ");
   tracker.replaceAll(/\{\{.*\}\}/, " ");
   tracker.replaceAll(/&[#a-z0-9]{1,5};/, " ");
   src = tracker.replaceAll(/<\/?[a-z0-9]+ ?([a-z]+="[^"]*" ?)*\/?>/i, " ");
+  src = src.split('`').join(' ');
 
   const options = {
     gfm: true,
